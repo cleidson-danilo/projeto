@@ -1,0 +1,149 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+      <ion-title>Aula de Mobile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true">
+    <div class="ion-padding">
+      <h1>🚀 Primeira Aula</h1>
+      <p>Bem-vindo ao desenvolvimento Ionic, <strong>Danilo</strong>!</p>
+  
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Status do Projeto</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Ambiente configurado e Node atualizado (v22+) com sucesso.
+        </ion-card-content>
+      </ion-card>
+  
+      <ion-button expand="block" (click)="exibirMensagem()" class="ion-margin-bottom">
+        Testar Clique
+      </ion-button>
+  
+      <ion-accordion-group>
+        <ion-accordion value="template-vars">
+          <ion-item slot="header" color="light">
+            <ion-label>3. Variáveis de Template e Eventos</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <p><strong>#variavel:</strong> Referência direta ao elemento.</p>
+            <code>&lt;ion-input #meuInput&gt;&lt;/ion-input&gt;</code><br />
+            <code>(keyup)="funcao(meuInput)"</code>
+            <hr />
+            <p><strong>$event:</strong> Captura dados do evento.</p>
+            <code>(change)="mudaCor($event)"</code>
+          </div>
+        </ion-accordion>
+  
+        <ion-accordion value="ternario">
+          <ion-item slot="header" color="light">
+            <ion-label>4. Lógica Rápida (Ternário)</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <p>Exemplo:</p>
+            <code>{{ '{{' }} idade >= 18 ? "Maior" : "Menor" {{ '}}' }}</code>
+          </div>
+        </ion-accordion>
+  
+        <ion-accordion value="cli">
+          <ion-item slot="header" color="light">
+            <ion-label>5. Comandos Ionic CLI</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ul>
+              <li><code>ionic s</code>: Rodar o App</li>
+              <li><code>ionic generate page nome</code>: Nova página</li>
+            </ul>
+          </div>
+        </ion-accordion>
+  
+        <ion-accordion value="logica-condicional">
+          <ion-item slot="header" color="light">
+            <ion-label>6. Estruturas Condicionais (&#64;if / &#64;else)</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <p><strong>Exemplo: Contexto Acesso</strong></p>
+            <pre>
+  &#64;if (idade >= 18) &#123;         // Teste único
+    &lt;p&gt;Pode entrar!&lt;/p&gt;        // Se for 18 ou mais
+  &#125; &#64;else if (temAutorizacao) &#123; // 2º Teste
+    &lt;p&gt;Acesso com Responsal&lt;/p&gt; 
+  &#125; &#64;else &#123;                   // Se falhar
+    &lt;p&gt;Acesso Negado&lt;/p&gt;       
+  &#125;</pre>
+          </div>
+        </ion-accordion>
+  
+        <ion-accordion value="repeticao">
+          <ion-item slot="header" color="light">
+            <ion-label>7. Estruturas de Repetição (&#64;for)</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <p><strong>Significado:</strong> <em>Loop</em> ou laço de repetição.</p>
+            <p><strong>Para que serve:</strong> Criar elementos HTML para cada item de uma lista automaticamente.</p>
+            <pre>
+  &#64;for (item of lista; track $index) &#123;
+    &lt;p&gt;{{ '{{' }} item {{ '}}' }}&lt;/p&gt;
+  &#125;</pre>
+          </div>
+        </ion-accordion>
+  
+        <ion-accordion value="lista-vazia">
+          <ion-item slot="header" color="light">
+            <ion-label>9. Mensagem Vazia (&#64;empty)</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <p><strong>Significado:</strong> Vazio.</p>
+            <p><strong>Para que serve:</strong> Mostra um aviso se a lista estiver zerada <code>[]</code>.</p>
+            <pre>
+  &#64;for (item of lista; track $index) &#123; ... &#125;
+  &#64;empty &#123;
+    &lt;p&gt;A lista está vazia.&lt;/p&gt;
+  &#125;</pre>
+          </div>
+        </ion-accordion>
+  
+        <ion-accordion value="eventos-teclado">
+          <ion-item slot="header" color="light">
+            <ion-label>10. Eventos de Teclado e Manipulação de Listas</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <p><strong>Significado:</strong> <em>Keyup.enter</em> dispara quando solta a tecla Enter.</p>
+            
+            <pre>
+    // No HTML
+    &lt;ion-input (keyup.enter)="add(input)" #input&gt;&lt;/ion-input&gt;
+            </pre>
+  
+            <hr />
+            
+            <div style="border: 1px dashed #ccc; padding: 10px; border-radius: 8px;">
+              <p><strong>Teste Prático:</strong></p>
+              <ion-item>
+                <ion-label position="stacked">Nome do País (min. 3 letras)</ion-label>
+                <ion-input 
+                  placeholder="Ex: Brasil" 
+                  (keyup.enter)="adicionarPais(novoPais)" 
+                  #novoPais>
+                </ion-input>
+              </ion-item>
+  
+              <p><strong>Lista:</strong></p>
+              @for (pais of listaPaises; track $index) {
+                <p>
+                  {{ $index + 1 }} - {{ pais }} 
+                  @if (pais.length > 6) {
+                    <ion-badge color="warning">Nome Longo</ion-badge>
+                  }
+                </p>
+              } @empty {
+                <p><small>Nenhum país na lista.</small></p>
+              }
+            </div>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </div>
+  </ion-content>
