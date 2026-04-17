@@ -33,3 +33,29 @@ pre {
   overflow-x: auto; /* Cria barra de rolagem se o código for longo */
   font-family: monospace;
 }
+
+/* Seção de teste prático */
+.practice-box {
+  border: 1px dashed #3880ff;
+  padding: 15px;
+  border-radius: 12px;
+  background: #f9f9f9;
+}
+
+.practice-title {
+  color: #000000;
+}
+
+.transparent-item {
+  --background: transparent;
+}
+
+.transparent-item ion-label {
+  color: #000000;
+  font-weight: 500;
+}
+
+.empty-message {
+  text-align: center;
+  color: #000000;
+}

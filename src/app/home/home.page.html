@@ -3,12 +3,12 @@
       <ion-title>Aula de Mobile</ion-title>
     </ion-toolbar>
   </ion-header>
-  
+
   <ion-content [fullscreen]="true">
     <div class="ion-padding">
       <h1>🚀 Primeira Aula</h1>
       <p>Bem-vindo ao desenvolvimento Ionic, <strong>Danilo</strong>!</p>
-  
+
       <ion-card>
         <ion-card-header>
           <ion-card-title>Status do Projeto</ion-card-title>
@@ -17,11 +17,11 @@
           Ambiente configurado e Node atualizado (v22+) com sucesso.
         </ion-card-content>
       </ion-card>
-  
+
       <ion-button expand="block" (click)="exibirMensagem()" class="ion-margin-bottom">
         Testar Clique
       </ion-button>
-  
+
       <ion-accordion-group>
         <ion-accordion value="template-vars">
           <ion-item slot="header" color="light">
@@ -36,7 +36,7 @@
             <code>(change)="mudaCor($event)"</code>
           </div>
         </ion-accordion>
-  
+
         <ion-accordion value="ternario">
           <ion-item slot="header" color="light">
             <ion-label>4. Lógica Rápida (Ternário)</ion-label>
@@ -46,7 +46,7 @@
             <code>{{ '{{' }} idade >= 18 ? "Maior" : "Menor" {{ '}}' }}</code>
           </div>
         </ion-accordion>
-  
+
         <ion-accordion value="cli">
           <ion-item slot="header" color="light">
             <ion-label>5. Comandos Ionic CLI</ion-label>
@@ -58,7 +58,7 @@
             </ul>
           </div>
         </ion-accordion>
-  
+
         <ion-accordion value="logica-condicional">
           <ion-item slot="header" color="light">
             <ion-label>6. Estruturas Condicionais (&#64;if / &#64;else)</ion-label>
@@ -69,13 +69,13 @@
   &#64;if (idade >= 18) &#123;         // Teste único
     &lt;p&gt;Pode entrar!&lt;/p&gt;        // Se for 18 ou mais
   &#125; &#64;else if (temAutorizacao) &#123; // 2º Teste
-    &lt;p&gt;Acesso com Responsal&lt;/p&gt; 
+    &lt;p&gt;Acesso com Responsal&lt;/p&gt;
   &#125; &#64;else &#123;                   // Se falhar
-    &lt;p&gt;Acesso Negado&lt;/p&gt;       
+    &lt;p&gt;Acesso Negado&lt;/p&gt;
   &#125;</pre>
           </div>
         </ion-accordion>
-  
+
         <ion-accordion value="repeticao">
           <ion-item slot="header" color="light">
             <ion-label>7. Estruturas de Repetição (&#64;for)</ion-label>
@@ -89,7 +89,7 @@
   &#125;</pre>
           </div>
         </ion-accordion>
-  
+
         <ion-accordion value="lista-vazia">
           <ion-item slot="header" color="light">
             <ion-label>9. Mensagem Vazia (&#64;empty)</ion-label>
@@ -104,46 +104,82 @@
   &#125;</pre>
           </div>
         </ion-accordion>
-  
+
         <ion-accordion value="eventos-teclado">
-          <ion-item slot="header" color="light">
-            <ion-label>10. Eventos de Teclado e Manipulação de Listas</ion-label>
-          </ion-item>
-          <div class="ion-padding" slot="content">
-            <p><strong>Significado:</strong> <em>Keyup.enter</em> dispara quando solta a tecla Enter.</p>
-            
-            <pre>
-    // No HTML
-    &lt;ion-input (keyup.enter)="add(input)" #input&gt;&lt;/ion-input&gt;
-            </pre>
-  
-            <hr />
-            
-            <div style="border: 1px dashed #ccc; padding: 10px; border-radius: 8px;">
-              <p><strong>Teste Prático:</strong></p>
-              <ion-item>
-                <ion-label position="stacked">Nome do País (min. 3 letras)</ion-label>
-                <ion-input 
-                  placeholder="Ex: Brasil" 
-                  (keyup.enter)="adicionarPais(novoPais)" 
-                  #novoPais>
-                </ion-input>
+        <ion-item slot="header" color="light">
+          <ion-label>10. Eventos de Teclado e Manipulação de Listas</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+
+          <p><strong>O que acontece aqui?</strong></p>
+          <p>
+            Quando você digita e aperta <strong>Enter</strong>, o Angular captura o evento através do <code>(keyup.enter)</code>.
+            Nós passamos a <strong>Variável de Template</strong> (<code>#novoPais</code>) para a função no TypeScript, que valida o texto e o adiciona a um <strong>Array</strong>. O <code>&#64;for</code> detecta essa mudança na lista e atualiza a tela instantaneamente.
+          </p>
+
+          <p><strong>Código HTML (A Interface):</strong></p>
+          <pre>
+&lt;!-- #input cria uma referência direta ao campo --&gt;
+&lt;ion-input
+  #input
+  (keyup.enter)="add(input)"
+  placeholder="Digite e dê Enter"&gt;
+&lt;/ion-input&gt;
+          </pre>
+
+          <p><strong>Código TypeScript (A Lógica):</strong></p>
+          <pre>
+paises: string[] = []; // Nossa lista na memória
+
+add(elemento: any) &#123;
+  const nome = elemento.value; // Pega o que foi digitado
+  if (nome.length >= 3) &#123;
+    this.paises.push(nome);    // Adiciona ao Array
+    elemento.value = "";       // Limpa o campo de texto
+  &#125;
+&#125;
+          </pre>
+
+          <hr />
+
+          <div class="practice-box">
+            <p class="practice-title"><strong> Teste Prático Real:</strong></p>
+            <ion-item lines="outline">
+              <ion-label position="stacked">Nome do País (min. 3 letras)</ion-label>
+              <ion-input
+                placeholder="Ex: Brasil"
+                (keyup.enter)="adicionarPais(novoPais)"
+                #novoPais>
+              </ion-input>
+            </ion-item>
+
+            <p><strong>Resultados da Lista:</strong></p>
+            @for (pais of listaPaises; track $index) {
+              <ion-item lines="none" class="transparent-item">
+                <ion-label>
+                  {{ $index + 1 }}° - <strong>{{ pais }}</strong>
+                </ion-label>
+                @if (pais.length > 6) {
+                  <ion-badge color="warning" slot="end">Nome Longo</ion-badge>
+                }
               </ion-item>
-  
-              <p><strong>Lista:</strong></p>
-              @for (pais of listaPaises; track $index) {
-                <p>
-                  {{ $index + 1 }} - {{ pais }} 
-                  @if (pais.length > 6) {
-                    <ion-badge color="warning">Nome Longo</ion-badge>
-                  }
-                </p>
-              } @empty {
-                <p><small>Nenhum país na lista.</small></p>
-              }
-            </div>
+            } @empty {
+              <p class="empty-message">
+                <ion-icon name="alert-circle-outline"></ion-icon>
+                <small> Digite um país acima para começar!</small>
+              </p>
+            }
           </div>
-        </ion-accordion>
+
+          <hr />
+          <p><strong>Por que essa lógica é poderosa?</strong></p>
+          <ul>
+            <li><strong>Variável de Template (<code>#</code>):</strong> Permite manipular o input sem precisar de <code>ngModel</code> (muito mais performático).</li>
+            <li><strong>Filtro de Tecla:</strong> O <code>.enter</code> evita que o código rode a cada letra digitada, economizando processamento.</li>
+            <li><strong>Validação Dinâmica:</strong> O <code>&#64;if</code> dentro do <code>&#64;for</code> permite criar alertas visuais para cada item da lista individualmente.</li>
+          </ul>
+        </div>
+      </ion-accordion>
       </ion-accordion-group>
     </div>
   </ion-content>

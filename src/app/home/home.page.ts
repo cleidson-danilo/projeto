@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 // Agrupamos todos os componentes do Ionic em um único import
-import { 
-  IonHeader, IonToolbar, IonTitle, IonContent, 
-  IonAccordion, IonAccordionGroup, IonItem, IonLabel, 
-  IonButton, IonCard, IonCardHeader, IonCardTitle, 
-  IonCardContent, IonBadge, IonInput // <--- ADICIONEI O IONINPUT AQUI
+import {
+  IonHeader, IonToolbar, IonTitle, IonContent,
+  IonAccordion, IonAccordionGroup, IonItem, IonLabel,
+  IonButton, IonCard, IonCardHeader, IonCardTitle,
+  IonCardContent, IonBadge, IonInput, IonIcon
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -15,23 +15,24 @@ import {
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
-    IonHeader, 
-    IonToolbar, 
-    IonTitle, 
-    IonContent, 
-    IonAccordion, 
-    IonAccordionGroup, 
-    IonItem, 
-    IonLabel, 
-    IonButton, 
-    IonCard, 
-    IonCardHeader, 
+    CommonModule,
+    FormsModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonAccordion,
+    IonAccordionGroup,
+    IonItem,
+    IonLabel,
+    IonButton,
+    IonCard,
+    IonCardHeader,
     IonCardTitle,
     IonCardContent,
     IonBadge,
-    IonInput // <--- ADICIONEI AQUI TAMBÉM
+    IonInput,
+    IonIcon
   ],
 })
 export class HomePage {
@@ -49,7 +50,7 @@ export class HomePage {
 
   adicionarPais(input: any) {
     const valor = input.value;
-    
+
     if (valor && valor.length >= 3) {
       this.listaPaises.push(valor); // Adiciona o valor na lista
       input.value = ""; // Limpa o campo após adicionar
